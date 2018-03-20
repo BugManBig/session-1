@@ -1,9 +1,6 @@
 package ru.sbt.jschool.session1;
 
-import java.util.Enumeration;
-import java.util.Objects;
-import java.util.Properties;
-import java.util.StringJoiner;
+import java.util.*;
 
 /**
  * Created by Df-170815-F1 on 20.03.2018.
@@ -34,6 +31,13 @@ public class Problem4 {
             if (Objects.equals(key, text.substring(0, text.length() - 1))) {
                 count = Integer.parseInt((String) (p.get(key)));
                 return;
+            }
+        }
+
+        Map<String, String> env = System.getenv();
+        for (String envName : env.keySet()) {
+            if (Objects.equals(envName, text.substring(0, text.length() - 1))) {
+                System.out.println("YY");
             }
         }
 
