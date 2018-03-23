@@ -25,29 +25,22 @@ public class Problem4 {
             return;
         }
 
-        Properties p = System.getProperties();
-        Enumeration keys = p.keys();
-        String key;
-        while (keys.hasMoreElements()) {
-            key = (String) (keys.nextElement());
-            if (Objects.equals(key, text)) {
-                count = Integer.parseInt((String) (p.get(key)));
-                return;
-            }
+        String prop = System.getProperty(text);
+        if (prop != null) {
+            count = Integer.parseInt(prop);
+            return;
         }
 
         Map<String, String> env = System.getenv();
-        for (String envName : env.keySet()) {
-            if (Objects.equals(envName, text)) {
-                count = Integer.parseInt(env.get(envName));
-                return;
-            }
-            if (Objects.equals(envName, textForFile)) {
-                String path = env.get(envName);
-                if (new File(path).exists()) {
-                    count = getCountFromFile(path);
-                    return;
-                }
+        if (env.get(text) != null) {
+            count = Integer.parseInt(env.get(text));
+            return;
+        }
+
+        if (env.get(textForFile) != null) {
+            String path = env.get(textForFile);
+            if (new File(path).exists()) {
+                count = getCountFromFile(path);
             }
         }
     }
